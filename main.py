@@ -9,10 +9,12 @@ def make_parse(file_input_name, file_output_name):
             else:
                 dependencies[tokens[0].lower()] = []
         with open(file_output_name, "w") as make:
+            make.write(".PHONY = clean\n\n")
+            make.write('clean:\n\trm -f $(BINS)\n\trm -f $(OBJS)\n\trm -f *~\n\n')
             for key in dependencies:
                 current_dependencies = dependencies.get(key)
                 make.write(key + ": " + ' '.join(current_dependencies) + '\n')
-                make.write('\t' + "@echo " + '\"' + key + '\"' + '\n\n')
+                make.write('\t' + "@echo " + '\"' + key + '\"' + '\n')
                 make.write('\t' + "@touch " + '\"' + key + '\"' + '\n\n')
 
 if __name__ == '__main__':
