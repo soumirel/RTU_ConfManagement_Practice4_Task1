@@ -13,6 +13,7 @@ def make_parse(file_input_name, file_output_name):
                 current_dependencies = dependencies.get(key)
                 make.write(key + ": " + ' '.join(current_dependencies) + '\n')
                 make.write('\t' + "@echo " + '\"' + key + '\"' + '\n\n')
+                make.write('\t' + "@touch " + '\"' + key + '\"' + '\n\n')
 
 if __name__ == '__main__':
     make_parse("graph.txt", "make")
