@@ -14,7 +14,7 @@ def make_parse(file_input_name, file_output_name):
                 research += str(key + " ")
             make.write('RESEARCH = ' + research + '\n\n')
             make.write(".PHONY = clean\n\n")
-            make.write('clean:\n\t@rm -f $^\n\n')
+            make.write('clean:\n\t@rm -q $(RESEARCH)\n\n')
             for key in dependencies:
                 current_dependencies = dependencies.get(key)
                 make.write(key + ": " + ' '.join(current_dependencies) + '\n')
