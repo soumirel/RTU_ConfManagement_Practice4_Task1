@@ -10,7 +10,7 @@ def make_parse(file_input_name, file_output_name):
                 dependencies[tokens[0].lower()] = []
         with open(file_output_name, "w") as make:
             make.write(".PHONY = clean\n\n")
-            make.write('clean:\n\trm -f $(BINS)\n\trm -f $(OBJS)\n\trm -f *~\n\n')
+            make.write('clean:\n\t@rm -f $(BINS)\n\t@rm -f $(OBJS)\n\t@rm -f *~\n\n')
             for key in dependencies:
                 current_dependencies = dependencies.get(key)
                 make.write(key + ": " + ' '.join(current_dependencies) + '\n')
