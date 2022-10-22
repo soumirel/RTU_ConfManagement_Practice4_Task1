@@ -12,14 +12,13 @@ def make_parse(file_input_name, file_output_name):
             research = ""
             for key in dependencies:
                 research += str(key + " ")
-            make.write('RESEARCH = ' + research + '\n\n')
-            make.write(".PHONY = clean\n\n")
-            make.write('clean:\n\t@rm -f $(RESEARCH)\n\n')
+            make.write('RESEARCH = ' + research +
+                       '\n\n.PHONY = clean\n\nclean:\n\t@rm -f $(RESEARCH)\n\n')
             for key in dependencies:
                 current_dependencies = dependencies.get(key)
                 make.write(key + ": " + ' '.join(current_dependencies) + '\n')
-                make.write('\t' + "@echo " + '\"' + key + '\"' + '\n')
-                make.write('\t' + "@touch " + '\"' + key + '\"' + '\n\n')
+                make.write('\t' + "@echo " + '\"' + key + '\"' + '\n' +
+                           '\t' + "@touch " + '\"' + key + '\"' + '\n\n')
 
 if __name__ == '__main__':
     make_parse("graph.txt", "make")
