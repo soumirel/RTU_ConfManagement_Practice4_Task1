@@ -9,6 +9,10 @@ def make_parse(file_input_name, file_output_name):
             else:
                 dependencies[tokens[0].lower()] = []
         with open(file_output_name, "w") as make:
+            research = ""
+            for key in dependencies:
+                research += str(key + " ")
+            make.write('RESEARCH = ' + research + '\n\n')
             make.write(".PHONY = clean\n\n")
             make.write('clean:\n\t@rm -f $^\n\n')
             for key in dependencies:
